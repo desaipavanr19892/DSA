@@ -1,0 +1,34 @@
+//https://leetcode.com/problems/subsets/?envType=list&envId=ebg40595
+
+//we use the concept of take and not take
+
+class Solution {
+    void helper(vector<int>& nums,int idx,vector<int> vec,vector<vector<int>>& op)
+    {
+          //base case
+          if(idx>=nums.size())
+          {
+              op.push_back(vec);
+              return;
+          }
+
+          //take case
+          vec.push_back(nums[idx]);
+
+          //recursion call
+          helper(nums,idx+1,vec,op);
+
+          //not take case
+          vec.pop_back();
+          helper(nums,idx+1,vec,op);
+    }
+public:
+    vector<vector<int>> subsets(vector<int>& nums) 
+    {
+        vector<vector<int>> res;
+        vector<int> vec;
+        helper(nums,0,vec,res);
+
+        return res;
+    }
+};
